@@ -1,7 +1,236 @@
 <!DOCTYPE html>
-<html lang="en"
-
+<html lang="es">
 <head>
-    <meta charset="UTF.8"
-    <meta name="vi"
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Carátula de Seguimiento</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background: #f0f4f8;
+      display: flex;
+      justify-content: center;
+      padding: 40px 20px;
+      min-height: 100vh;
+    }
+    .documento {
+      background: #fff;
+      width: 100%;
+      max-width: 860px;
+      border-radius: 12px;
+      box-shadow: 0 8px 30px rgba(0,0,0,0.12);
+      overflow: hidden;
+    }
+
+    /* ── ENCABEZADO ── */
+    .encabezado {
+      background: linear-gradient(135deg, #1a3c6e, #2563b0);
+      color: #fff;
+      padding: 32px 40px;
+      display: flex;
+      align-items: center;
+      gap: 24px;
+    }
+    .logo {
+      width: 72px; height: 72px;
+      background: rgba(255,255,255,.15);
+      border-radius: 10px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 32px; flex-shrink: 0;
+    }
+    .enc-txt h1 { font-size: 22px; font-weight: 700; }
+    .enc-txt p  { font-size: 13px; opacity: .8; margin-top: 4px; }
+    .badge {
+      margin-left: auto;
+      background: #22c55e;
+      color: #fff;
+      font-size: 12px; font-weight: 600;
+      padding: 6px 14px;
+      border-radius: 20px;
+    }
+
+    /* ── CUERPO ── */
+    .cuerpo { padding: 36px 40px; }
+
+    .titulo {
+      text-align: center;
+      margin-bottom: 32px;
+      padding-bottom: 24px;
+      border-bottom: 2px solid #e2e8f0;
+    }
+    .titulo h2 { font-size: 24px; color: #1e293b; font-weight: 700; }
+    .titulo p  { font-size: 13px; color: #64748b; margin-top: 6px; }
+
+    /* ── GRID DE DATOS ── */
+    .grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-bottom: 28px;
+    }
+    .campo {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 8px;
+      padding: 12px 16px;
+    }
+    .campo label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .8px;
+      color: #94a3b8;
+      font-weight: 600;
+      display: block;
+      margin-bottom: 4px;
+    }
+    .campo span { font-size: 14px; color: #1e293b; font-weight: 500; }
+
+    /* ── BARRA DE PROGRESO ── */
+    .progreso-box {
+      background: #f8fafc;
+      border: 1px solid #e2e8f0;
+      border-radius: 10px;
+      padding: 20px 24px;
+      margin-bottom: 28px;
+    }
+    .prog-hdr {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+    .prog-hdr span { font-size: 13px; font-weight: 600; color: #334155; }
+    .prog-hdr .pct { font-size: 22px; font-weight: 700; color: #2563b0; }
+    .barra-bg {
+      background: #e2e8f0;
+      border-radius: 999px;
+      height: 12px;
+      overflow: hidden;
+    }
+    .barra-fill {
+      background: linear-gradient(90deg, #2563b0, #38bdf8);
+      height: 100%;
+      border-radius: 999px;
+      width: 65%;           /* ← cambia este % */
+    }
+
+    /* ── TABLA DE HITOS ── */
+    .hitos h3 { font-size: 14px; font-weight: 700; color: #1e293b; margin-bottom: 14px; }
+    table { width: 100%; border-collapse: collapse; font-size: 13px; }
+    thead th {
+      background: #1a3c6e;
+      color: #fff;
+      padding: 10px 14px;
+      text-align: left;
+      font-weight: 600;
+    }
+    thead th:first-child { border-radius: 8px 0 0 0; }
+    thead th:last-child  { border-radius: 0 8px 0 0; }
+    tbody tr:nth-child(even) { background: #f8fafc; }
+    tbody td { padding: 10px 14px; color: #334155; border-bottom: 1px solid #e2e8f0; }
+
+    .chip { display: inline-block; padding: 3px 10px; border-radius: 12px; font-size: 11px; font-weight: 600; }
+    .cv { background: #dcfce7; color: #166534; }
+    .ca { background: #dbeafe; color: #1e40af; }
+    .cn { background: #fff7ed; color: #9a3412; }
+    .cg { background: #f1f5f9; color: #475569; }
+
+    /* ── FIRMAS ── */
+    .firmas {
+      display: grid;
+      grid-template-columns: repeat(3,1fr);
+      gap: 20px;
+      margin-top: 36px;
+      padding-top: 24px;
+      border-top: 2px solid #e2e8f0;
+    }
+    .firma { text-align: center; }
+    .linea { border-top: 1.5px solid #94a3b8; margin-bottom: 8px; }
+    .firma .nom { font-size: 13px; font-weight: 600; color: #1e293b; }
+    .firma .car { font-size: 11px; color: #64748b; margin-top: 2px; }
+
+    /* ── PIE ── */
+    .pie {
+      background: #1a3c6e;
+      color: rgba(255,255,255,.6);
+      text-align: center;
+      font-size: 11px;
+      padding: 14px 20px;
+    }
+  </style>
 </head>
+<body>
+<div class="documento">
+
+  <!-- ENCABEZADO -->
+  <div class="encabezado">
+    <div class="logo">🏢</div>
+    <div class="enc-txt">
+      <h1>ORGANIZACIÓN / EMPRESA</h1>
+      <p>Departamento de Gestión de Proyectos</p>
+    </div>
+    <div class="badge">● En Progreso</div>
+  </div>
+
+  <!-- CUERPO -->
+  <div class="cuerpo">
+
+    <div class="titulo">
+      <h2>CARÁTULA DE SEGUIMIENTO DE PROYECTO</h2>
+      <p>Documento de control y monitoreo — Versión 1.0</p>
+    </div>
+
+    <!-- DATOS -->
+    <div class="grid">
+      <div class="campo"><label>Nombre del Proyecto</label><span>Implementación Sistema ERP</span></div>
+      <div class="campo"><label>Código de Proyecto</label><span>PRY-2026-041</span></div>
+      <div class="campo"><label>Responsable</label><span>Ing. María González</span></div>
+      <div class="campo"><label>Área / Unidad</label><span>Tecnología e Innovación</span></div>
+      <div class="campo"><label>Fecha de Inicio</label><span>01 / Enero / 2026</span></div>
+      <div class="campo"><label>Fecha de Cierre Estimada</label><span>30 / Junio / 2026</span></div>
+      <div class="campo"><label>Fecha de Reporte</label><span>08 / Mayo / 2026</span></div>
+      <div class="campo"><label>Presupuesto Asignado</label><span>$120,000.00 USD</span></div>
+    </div>
+
+    <!-- PROGRESO -->
+    <div class="progreso-box">
+      <div class="prog-hdr">
+        <span>Avance General del Proyecto</span>
+        <span class="pct">65%</span>
+      </div>
+      <div class="barra-bg"><div class="barra-fill"></div></div>
+    </div>
+
+    <!-- HITOS -->
+    <div class="hitos">
+      <h3>📋 Estado de Hitos / Actividades</h3>
+      <table>
+        <thead>
+          <tr><th>#</th><th>Actividad / Hito</th><th>Responsable</th><th>Fecha Límite</th><th>Estado</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>1</td><td>Levantamiento de Requisitos</td><td>Equipo Funcional</td><td>15/Ene/2026</td><td><span class="chip cv">Completado</span></td></tr>
+          <tr><td>2</td><td>Diseño de Arquitectura</td><td>Ing. Torres</td><td>10/Feb/2026</td><td><span class="chip cv">Completado</span></td></tr>
+          <tr><td>3</td><td>Desarrollo Módulos Core</td><td>Equipo Dev</td><td>30/Abr/2026</td><td><span class="chip ca">En Progreso</span></td></tr>
+          <tr><td>4</td><td>Pruebas de Integración</td><td>QA / Testing</td><td>31/May/2026</td><td><span class="chip cn">Pendiente</span></td></tr>
+          <tr><td>5</td><td>Capacitación Usuarios</td><td>RRHH</td><td>15/Jun/2026</td><td><span class="chip cg">No Iniciado</span></td></tr>
+          <tr><td>6</td><td>Cierre y Entrega Final</td><td>Ing. González</td><td>30/Jun/2026</td><td><span class="chip cg">No Iniciado</span></td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <!-- FIRMAS -->
+    <div class="firmas">
+      <div class="firma"><div style="height:48px"></div><div class="linea"></div><p class="nom">Ing. María González</p><p class="car">Responsable de Proyecto</p></div>
+      <div class="firma"><div style="height:48px"></div><div class="linea"></div><p class="nom">Lic. Carlos Ramírez</p><p class="car">Supervisor / Gerente</p></div>
+      <div class="firma"><div style="height:48px"></div><div class="linea"></div><p class="nom">Dr. Ana Medina</p><p class="car">Aprobación Dirección</p></div>
+    </div>
+
+  </div>
+
+  <div class="pie">Documento Confidencial — Uso Interno | © 2026 Organización · Todos los derechos reservados</div>
+</div>
+</body>
+</html>
+
